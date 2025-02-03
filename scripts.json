@@ -1,4 +1,10 @@
-[
-  "make-it-snow.js",
-  "christmas-countdown.js"
-]
+{
+  "make-it-snow": {
+    "name": "make-it-snow.js",
+    "path": "https://raw.githubusercontent.com/Remote-Falcon/remote-falcon-viewer-page-js/refs/heads/main/make-it-snow.js"
+  },
+  "christmas-countdown": {
+    "name": "christmas-countdown.js",
+    "path": "https://raw.githubusercontent.com/Remote-Falcon/remote-falcon-viewer-page-js/refs/heads/main/christmas-countdown.js"
+  }
+}
