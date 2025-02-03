@@ -1,1 +1,32 @@
-function countdown(){var t=new Date,e=new Date(2025,11,25),t=t.getTime(),e=e.getTime(),e=Math.floor((e-t)/1e3),t=Math.floor(e/60),o=Math.floor(t/60),n=Math.floor(o/24),o=(o%=24)<10?"0"+o:o,t=(t%=60)<10?"0"+t:t,e=(e%=60)<10?"0"+e:e;document.querySelector("#to-christmas-days").textContent=n,document.querySelector("#to-christmas-hours").textContent=o,document.querySelector("#to-christmas-minutes").textContent=t,document.querySelector("#to-christmas-seconds").textContent=e,setTimeout(countdown,1e3)}countdown();
+function countdown() {
+  let now = new Date();
+  let evenDate = new Date(2025, 11, 25);
+
+  let actualTime = now.getTime();
+  let eventTime = evenDate.getTime();
+  let remTime = eventTime - actualTime;
+
+  let s = Math.floor(remTime / 1000);
+  let m = Math.floor(s / 60);
+  let h = Math.floor(m / 60);
+  let d = Math.floor(h / 24);
+
+  h %= 24;
+  m %= 60;
+  s %= 60;
+
+  h = h < 10 ? '0' + h : h;
+  m = m < 10 ? '0' + m : m;
+  s = s < 10 ? '0' + s : s;
+
+  document.querySelector('#to-christmas-days').textContent = d;
+  document.querySelector('#to-christmas-hours').textContent = h;
+  document.querySelector('#to-christmas-minutes').textContent = m;
+  document.querySelector('#to-christmas-seconds').textContent = s;
+
+  setTimeout(countdown, 1000)
+
+
+};
+
+countdown();
