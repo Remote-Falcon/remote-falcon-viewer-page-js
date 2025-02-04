@@ -1,1 +1,42 @@
-function countdown(){var t=document.getElementById("#to-christmas-days"),e=document.getElementById("#to-christmas-hours"),n=document.getElementById("#to-christmas-minutes"),o=document.getElementById("#to-christmas-seconds"),l=new Date,m=new Date(2025,11,25),l=l.getTime(),m=m.getTime(),m=Math.floor((m-l)/1e3),l=Math.floor(m/60),u=Math.floor(l/60),s=Math.floor(u/24),u=(u%=24)<10?"0"+u:u,l=(l%=60)<10?"0"+l:l,m=(m%=60)<10?"0"+m:m;null!=t&&(t.textContent=s),null!=e&&(e.textContent=u),null!=n&&(n.textContent=l),null!=o&&(o.textContent=m),setTimeout(countdown,1e3)}countdown();
+function countdown() {
+  const daysElement = document.createElement("span");
+  daysElement.setAttribute("id", "to-christmas-days-span");
+
+  const hoursElement = document.createElement("span");
+  hoursElement.setAttribute("id", "to-christmas-hours-span");
+
+  const minutesElement = document.createElement("span");
+  minutesElement.setAttribute("id", "to-christmas-minutes-span");
+
+  const secondsElement = document.createElement("span");
+  secondsElement.setAttribute("id", "to-christmas-seconds-span");
+
+  let now = new Date();
+  let evenDate = new Date(2025, 11, 25);
+
+  let actualTime = now.getTime();
+  let eventTime = evenDate.getTime();
+  let remTime = eventTime - actualTime;
+
+  let s = Math.floor(remTime / 1000);
+  let m = Math.floor(s / 60);
+  let h = Math.floor(m / 60);
+  let d = Math.floor(h / 24);
+
+  h %= 24;
+  m %= 60;
+  s %= 60;
+
+  h = h < 10 ? '0' + h : h;
+  m = m < 10 ? '0' + m : m;
+  s = s < 10 ? '0' + s : s;
+
+  daysElement.textContent = d;
+  hoursElement.textContent = h;
+  minutesElement.textContent = m;
+  secondsElement.textContent = s;
+
+  setTimeout(countdown, 1000)
+};
+
+countdown();
