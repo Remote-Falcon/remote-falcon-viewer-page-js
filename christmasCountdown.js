@@ -1,16 +1,4 @@
 function countdown() {
-  const daysElement = document.createElement("span");
-  daysElement.setAttribute("id", "to-christmas-days-span");
-
-  const hoursElement = document.createElement("span");
-  hoursElement.setAttribute("id", "to-christmas-hours-span");
-
-  const minutesElement = document.createElement("span");
-  minutesElement.setAttribute("id", "to-christmas-minutes-span");
-
-  const secondsElement = document.createElement("span");
-  secondsElement.setAttribute("id", "to-christmas-seconds-span");
-
   let now = new Date();
   let evenDate = new Date(2025, 11, 25);
 
@@ -31,10 +19,10 @@ function countdown() {
   m = m < 10 ? '0' + m : m;
   s = s < 10 ? '0' + s : s;
 
-  daysElement.textContent = d;
-  hoursElement.textContent = h;
-  minutesElement.textContent = m;
-  secondsElement.textContent = s;
+  document.querySelector('#to-christmas-days').textContent = d;
+  document.querySelector('#to-christmas-hours').textContent = h;
+  document.querySelector('#to-christmas-minutes').textContent = m;
+  document.querySelector('#to-christmas-seconds').textContent = s;
 
   setTimeout(countdown, 1000)
 };
