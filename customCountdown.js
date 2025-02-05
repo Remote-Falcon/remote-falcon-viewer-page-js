@@ -4,6 +4,14 @@ function countdown() {
   const month = urlParams.get('customCountdownMonth');
   const day = urlParams.get('customCountdownDay');
 
+  console.log(year);
+  console.log(month);
+  console.log(day);
+
+  console.log(Number(year));
+  console.log(Number(month));
+  console.log(Number(day));
+
   let now = new Date();
   let evenDate = new Date(Number(year), Number(month), Number(day));
 
