@@ -19,10 +19,18 @@ function countdown() {
   m = m < 10 ? '0' + m : m;
   s = s < 10 ? '0' + s : s;
 
-  document.querySelector('#to-christmas-days').textContent = d;
-  document.querySelector('#to-christmas-hours').textContent = h;
-  document.querySelector('#to-christmas-minutes').textContent = m;
-  document.querySelector('#to-christmas-seconds').textContent = s;
+  if(document.querySelector('#to-christmas-days') != null) {
+    document.querySelector('#to-christmas-days').textContent = d;
+  }
+  if(document.querySelector('#to-christmas-hours') != null) {
+    document.querySelector('#to-christmas-hours').textContent = h;
+  }
+  if(document.querySelector('#to-christmas-minutes') != null) {
+    document.querySelector('#to-christmas-minutes').textContent = m;
+  }
+  if(document.querySelector('#to-christmas-seconds') != null) {
+    document.querySelector('#to-christmas-seconds').textContent = s;
+  }
 
   setTimeout(countdown, 1000)
 };
