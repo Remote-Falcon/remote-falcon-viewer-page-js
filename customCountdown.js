@@ -5,7 +5,7 @@ function countdown() {
   const day = urlParams.get('customCountdownDay');
 
   let now = new Date();
-  let evenDate = new Date(year, month, day);
+  let evenDate = new Date(Number(year), Number(month), Number(day));
 
   let actualTime = now.getTime();
   let eventTime = evenDate.getTime();
