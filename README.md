@@ -126,7 +126,7 @@ Implements a UI to make your page more mobile friendly.
 
 ![dynamicMenu](/img/dynamicMenu.png)
 
-In order to use this script you will need to add CSS and 
+In order to use this script you will need to add CSS and HTML to your viewer page.
 
 Add the below to your <head> section
 ```
@@ -367,7 +367,7 @@ body {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 ```
 
-Next inside the body tag will be the below HTML.  
+Next inside the <body> tag will be the below HTML.  
 All of your page content will be inside the "content__body" tags.  You can add/remove as many tabs as you'd reasonably want, but suggest staying at 3-5 tabs total.
 
 ```
