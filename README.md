@@ -6,7 +6,7 @@
 3. [The Scripts](#the-scripts)
    1. [Make It Snow](#make-it-snow)
    2. [Christmas Countdown](#christmas-countdown)
-
+   3. [Dynamic Menu](#dynamic-menu)
 # Script Guidelines
 Before submitting your scripts for use with Remote Falcon, there are some general
 guidelines that need to be followed. If not followed properly, it could result in the 
