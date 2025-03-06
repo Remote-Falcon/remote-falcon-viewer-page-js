@@ -131,245 +131,245 @@ In order to use this script you will need to add CSS and HTML to your viewer pag
 Add the below to your <head> section
 ```
 <style>
-:root {
-  --bgColorMenu: #1d1d27;
-  --duration: 0.7s;
-}
+	:root {
+	  --bgColorMenu: #1d1d27;
+	  --duration: 0.7s;
+	}
 
-html {
-	box-sizing: border-box;
+	html {
+		box-sizing: border-box;
+		
+	}
+
+	body {
+		margin: 0;
+		height: 100vh;
+		overflow: hidden;
+		background-color: #1d1d27;
+		-webkit-tap-highlight-color: transparent;
+	}
 	
-}
-
-body {
-	margin: 0;
-	height: 100vh;
-	overflow: hidden;
-	background-color: #1d1d27;
-	-webkit-tap-highlight-color: transparent;
-}
-
-/*******************************
-	Content Section
-*******************************/
-
-.content-container {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 3.5em; /* Height of the menu */
-	overflow: hidden;
-	display: flex;
-	justify-content: center;
-	align-items: flex-end;
-}
-
-
-/* Main Window */
-.content__body {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: flex-start;
-	padding: 1em;
-	overflow-y: auto;  /* Ensure scrolling is enabled */
-	background-color: var(--bgColorItem);
-	opacity: 0;
-	transition: opacity var(--duration) ease, transform var(--duration) ease;
-	font-family: 'Comfortaa', sans-serif;
-	background: linear-gradient(135deg, var(--bgColorItem), #333333);
-	max-height: 100%;  /* Prevent overflow above scrollable area */
-	height: calc(100vh - 3.5em); /* Ensure body fits within available space */
-	text-align: center;
-}
-
-
-.content__body.active {
-	display: flex;
-	opacity: 1;
-	z-index: 1;
-}
-
-.content__body h1, .content__body h2, .content__body p {
-	margin: 0.5em 0;
-	text-align: center;
-	color: white; /* Ensure text contrast */
-}
-
-.content__body a {
-	text-decoration: none;
-	color: #ffd700; /* Highlighted text color (gold) */
-	font-weight: bold;
-	transition: color 0.3s ease;
-}
-
-.content__body a:hover {
-	color: #ff4500; /* Add hover effect for links (orange-red) */
-}
-
-.content__body img {
-	max-width: 80%; /* Make images responsive */
-	height: auto;
-	margin: 1em 0;
-	border-radius: 10px; /* Slightly rounded edges for images */
-}
-
-.content__body .rf-titles {
-	font-size: 1.5em;
-	font-weight: bold;
-	margin-bottom: 0.5em;
-	color: white;
-	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Subtle text shadow */
-}
-
-.content__body .tune-to {
-	font-size: 4em;
-	font-weight: bold;
-	margin-bottom: 0.5em;
-	color: white;
-	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Subtle text shadow */
-}
-.content__body .playing-now {
-	font-size: 1.2em;
-	color: #d4edff; /* Light blue text */
-	margin: 1em 0;
-}
-
-.content__body .jukebox-queue-container {
-	width: 100%;
-	max-width: 600px;
-	padding: 1em;
-	background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
-	border-radius: 10px;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-	overflow-y: auto;
-	max-height: 200px; /* Prevent it from taking too much space */
-}
-
-.content__body strong {
-	font-size: 1.2em;
-	color: #ffd700;
-	display: block;
-	margin: 1em 0;
-}
-.content__subitem {
-	display: flex;  
-	align-items: center;  
-	width: 100%;
-	flex-direction: column;
-}
-
-
-
-/*Bottom Menu*/
-.rf_menu {
-	margin: 0;
-	display: flex;
-	width: 100%;
-	font-size: 1.5em;
-	padding: 0;
-	position: fixed;
-	bottom: 0;
-	align-items: center;
-	justify-content: space-around;
-	background-color: var(--bgColorMenu);
-	z-index: 100;
-	height: 3.5em; /* Adjust height as needed */
-}
-
-.rf_menu__item {
-	all: unset;
-	flex-grow: 1;
-	z-index: 100;
-	display: flex;
-	cursor: pointer;
-	position: relative;
-	border-radius: 50%;
-	align-items: center;
-	justify-content: center;
-	padding: 0.55em 0 0.85em;
-	transition: transform var(--duration);
-}
-
-.rf_menu__item::before {
-	content: "";
-	z-index: -1;
-	width: 4.2em;
-	height: 4.2em;
-	border-radius: 50%;
-	position: absolute;
-	transform: scale(0);
-	transition: background-color var(--duration), transform var(--duration);
-}
-
-.rf_menu__item.active {
-	transform: translate3d(0, -0.8em, 0);
-}
-
-.rf_menu__item.active::before {
-	transform: scale(1);
-	background-color: var(--bgColorItem);
-}
-
-
-.icon {
-	width: 2.6em;
-	height: 2.6em;
-	stroke: white;
-	fill: transparent;
-	stroke-width: 1pt;
-	stroke-miterlimit: 10;
-	stroke-linecap: round;
-	stroke-linejoin: round;
-	stroke-dasharray: 400;
-}
-
-
-
-@keyframes strok {
-	100% {
-		stroke-dashoffset: 400;
+	/*******************************
+		Content Section
+	*******************************/
+	
+	.content-container {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 3.5em; /* Height of the menu */
+		overflow: hidden;
+		display: flex;
+		justify-content: center;
+		align-items: flex-end;
 	}
-}
-
-.rf_menu__border {
-	left: 0;
-	bottom: 99%;
-	width: 10.9em;
-	height: 2.4em;
-	position: absolute;
-	clip-path: url(#menu);
-	will-change: transform;
-	background-color: var(--bgColorMenu);
-	transition: transform 0.4s;
-}
-
-.svg-container {
-	width: 0;
-	height: 0;
-}
-
-/* Responsive settings */
-@media screen and (max-width: 50em) {
-	.menu {
-		font-size: 0.8em;
+	
+	
+	/* Main Window */
+	.content__body {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-start;
+		padding: 1em;
+		overflow-y: auto;  /* Ensure scrolling is enabled */
+		background-color: var(--bgColorItem);
+		opacity: 0;
+		transition: opacity var(--duration) ease, transform var(--duration) ease;
+		font-family: 'Comfortaa', sans-serif;
+		background: linear-gradient(135deg, var(--bgColorItem), #333333);
+		max-height: 100%;  /* Prevent overflow above scrollable area */
+		height: calc(100vh - 3.5em); /* Ensure body fits within available space */
+		text-align: center;
 	}
-}
-#
+	
+	
+	.content__body.active {
+		display: flex;
+		opacity: 1;
+		z-index: 1;
+	}
+	
+	.content__body h1, .content__body h2, .content__body p {
+		margin: 0.5em 0;
+		text-align: center;
+		color: white; /* Ensure text contrast */
+	}
+	
+	.content__body a {
+		text-decoration: none;
+		color: #ffd700; /* Highlighted text color (gold) */
+		font-weight: bold;
+		transition: color 0.3s ease;
+	}
+	
+	.content__body a:hover {
+		color: #ff4500; /* Add hover effect for links (orange-red) */
+	}
+	
+	.content__body img {
+		max-width: 80%; /* Make images responsive */
+		height: auto;
+		margin: 1em 0;
+		border-radius: 10px; /* Slightly rounded edges for images */
+	}
+	
+	.content__body .rf-titles {
+		font-size: 1.5em;
+		font-weight: bold;
+		margin-bottom: 0.5em;
+		color: white;
+		text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Subtle text shadow */
+	}
+	
+	.content__body .tune-to {
+		font-size: 4em;
+		font-weight: bold;
+		margin-bottom: 0.5em;
+		color: white;
+		text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Subtle text shadow */
+	}
+	.content__body .playing-now {
+		font-size: 1.2em;
+		color: #d4edff; /* Light blue text */
+		margin: 1em 0;
+	}
+	
+	.content__body .jukebox-queue-container {
+		width: 100%;
+		max-width: 600px;
+		padding: 1em;
+		background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+		border-radius: 10px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+		overflow-y: auto;
+		max-height: 200px; /* Prevent it from taking too much space */
+	}
+	
+	.content__body strong {
+		font-size: 1.2em;
+		color: #ffd700;
+		display: block;
+		margin: 1em 0;
+	}
+	.content__subitem {
+		display: flex;  
+		align-items: center;  
+		width: 100%;
+		flex-direction: column;
+	}
+	
+	
+	
+	/*Bottom Menu*/
+	.rf_menu {
+		margin: 0;
+		display: flex;
+		width: 100%;
+		font-size: 1.5em;
+		padding: 0;
+		position: fixed;
+		bottom: 0;
+		align-items: center;
+		justify-content: space-around;
+		background-color: var(--bgColorMenu);
+		z-index: 100;
+		height: 0.5em; /* Adjust height as needed */
+	}
 
+   .rf_menu__item {
+		all: unset;
+		flex-grow: 1;
+		z-index: 100;
+		display: flex;
+		cursor: pointer;
+		position: relative;
+		border-radius: 50%;
+		align-items: center;
+		justify-content: center;
+		padding: 0.0em 0 1.5em;
+		transition: transform var(--duration);
+	}
+
+	.rf_menu__item::before {
+		content: "";
+		z-index: -1;
+		width: 2.2em;
+		height: 2.2em;
+		border-radius: 50%;
+		position: absolute;
+		transform: scale(0);
+		transition: background-color var(--duration), transform var(--duration);
+	}
+
+	.rf_menu__item.active {
+		transform: translate3d(0, -0.5em, 0);
+	}
+
+	.rf_menu__item.active::before {
+		transform: scale(1);
+		background-color: var(--bgColorItem);
+	}
+
+
+	.icon {
+		width: 2.6em;
+		height: 2.6em;
+		stroke: white;
+		fill: transparent;
+		stroke-width: 1pt;
+		stroke-miterlimit: 10;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		stroke-dasharray: 400;
+	}
+
+   
+
+	@keyframes strok {
+		100% {
+			stroke-dashoffset: 400;
+		}
+	}
+
+	.rf_menu__border {
+		left: 0;
+		bottom: 99%;
+		width: 10.9em;
+		height: 3.4em;
+		position: absolute;
+		clip-path: url(#menu);
+		will-change: transform;
+		background-color: var(--bgColorMenu);
+		transition: transform 0.4s;
+	}
+
+	.svg-container {
+		width: 0;
+		height: 0;
+	}
+
+	/* Responsive settings */
+	@media screen and (max-width: 50em) {
+		.menu {
+			font-size: 0.8em;
+		}
+	}
+	#
+	
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 ```
 
 Next inside the <body> tag will be the below HTML.  
 All of your page content will be inside the "content__body" tags.  You can add/remove as many tabs as you'd reasonably want, but suggest staying at 3-5 tabs total.
-
+You may need to buffer the bottom of some tabs with extra lines to prevent the menu from overlapping when scrolling.
 ```
 <div class="content-container">
 	<div class="content__body active" style="--bgColorItem: #C41E3A;">
@@ -383,24 +383,27 @@ All of your page content will be inside the "content__body" tags.  You can add/r
 	</div>
 	<div class="content__body" style="--bgColorItem: #e0b115;">
 		<!-- Tab 4 -->
+		<!-- you may need to buffer the bottom of some tabs with <br /> -->
 	</div>
 </div>
 <menu class="rf_menu">
 <!-- You can Add/Remove as many buttons as you want but make sure you match the number of "content__body" containers-->
+	
+	
 	<button class="rf_menu__item active" style="--bgColorItem: #C41E3A;">
-		<i class="fa-solid fa-house fa-2xl" style="color: #ffffff;"></i>
+		<i class="fa-solid fa-house fa" style="color: #ffffff;"></i>
 	</button>
 	<button class="rf_menu__item" style="--bgColorItem: #008000;-">
-		<i class="fa-solid fa-music fa-2xl" style="color: #ffffff;"></i>
+		<i class="fa-solid fa-music fa" style="color: #ffffff;"></i>
 	</button>
 	<button class="rf_menu__item" style="--bgColorItem: #4343f5;">
-		<i class="fas fa-hand-holding-heart fa-2xl" style="color: #ffffff;"></i>
+		<i class="fas fa-hand-holding-heart fa" style="color: #ffffff;"></i>
 	</button>
 	<button class="rf_menu__item" style="--bgColorItem: #e0b115;">
 		 <svg class="icon" viewBox="0 0 24 24">
-			<path d="M3.8,6.6h16.4"/>
-			<path d="M20.2,12.1H3.8"/>
-			<path d="M3.8,17.5h16.4"/>
+			<path d="M5.8,7h12.4"/>
+			<path d="M18.2,12H5.8"/>
+			<path d="M5.8,17h12.4"/>
 		</svg>
 	</button>
 	<div class="rf_menu__border" />
