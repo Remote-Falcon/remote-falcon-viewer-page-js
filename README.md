@@ -6,7 +6,10 @@
 3. [The Scripts](#the-scripts)
    1. [Make It Snow](#make-it-snow)
    2. [Christmas Countdown](#christmas-countdown)
-   3. [Dynamic Menu](#dynamic-menu)
+   3. [Halloween Countdown](#halloween-countdown)
+   4. [Thanksgiving Countdown](#thanksgiving-countdown)
+   5. [Custom Countdown](#custom-countdown)
+   6. [Dynamic Menu](#dynamic-menu)
 # Script Guidelines
 Before submitting your scripts for use with Remote Falcon, there are some general
 guidelines that need to be followed. If not followed properly, it could result in the 
@@ -108,6 +111,187 @@ Below is the code used (along with style) for the screenshot above. Feel free to
             <td id="to-christmas-hours"></td>
             <td id="to-christmas-minutes"></td>
             <td id="to-christmas-seconds"></td>
+          </tr>
+          <tr>
+            <td>Days</td>
+            <td>Hours</td>
+            <td>Minutes</td>
+            <td>Seconds</td>
+          </tr>
+      </table>
+    </h1>
+</div>
+```
+
+## Halloween Countdown
+Adds a countdown to Halloween (October 31st) to your viewer page.
+
+In order to use this, you will need to add a few elements to your page HTML.
+There are four elements used in this script; one for Days, one for Hours, one for Minutes, and one for Seconds.
+You can choose to have all or just one of these.
+
+The elements can be whatever you want (i.e. span, div, paragraph, table data, etc.), but must have the following
+IDs:
+```
+to-halloween-days
+to-halloween-hours
+to-halloween-minutes
+to-halloween-seconds
+```
+
+Below is example code (along with style) for a Halloween countdown. Feel free to use it.
+```
+.countdownContainer {
+   margin: 0 auto;
+   text-align: center;
+   padding: 20px;
+   border-radius: 5px;
+}
+
+.halloween {
+   font-size: 4rem;
+}
+.counter {
+   font-size: 4rem;
+}
+
+<div style="padding-top:5em">
+    <h1>
+        <table class="countdownContainer">
+          <tr class="halloween">
+            <td colspan="4">Countdown to Halloween!</td>
+          </tr>
+          <tr class="counter">
+            <td id="to-halloween-days"></td>
+            <td id="to-halloween-hours"></td>
+            <td id="to-halloween-minutes"></td>
+            <td id="to-halloween-seconds"></td>
+          </tr>
+          <tr>
+            <td>Days</td>
+            <td>Hours</td>
+            <td>Minutes</td>
+            <td>Seconds</td>
+          </tr>
+      </table>
+    </h1>
+</div>
+```
+
+## Thanksgiving Countdown
+Adds a countdown to Thanksgiving (4th Thursday of November) to your viewer page.
+
+In order to use this, you will need to add a few elements to your page HTML.
+There are four elements used in this script; one for Days, one for Hours, one for Minutes, and one for Seconds.
+You can choose to have all or just one of these.
+
+The elements can be whatever you want (i.e. span, div, paragraph, table data, etc.), but must have the following
+IDs:
+```
+to-thanksgiving-days
+to-thanksgiving-hours
+to-thanksgiving-minutes
+to-thanksgiving-seconds
+```
+
+Below is example code (along with style) for a Thanksgiving countdown. Feel free to use it.
+```
+.countdownContainer {
+   margin: 0 auto;
+   text-align: center;
+   padding: 20px;
+   border-radius: 5px;
+}
+
+.thanksgiving {
+   font-size: 4rem;
+}
+.counter {
+   font-size: 4rem;
+}
+
+<div style="padding-top:5em">
+    <h1>
+        <table class="countdownContainer">
+          <tr class="thanksgiving">
+            <td colspan="4">Countdown to Thanksgiving!</td>
+          </tr>
+          <tr class="counter">
+            <td id="to-thanksgiving-days"></td>
+            <td id="to-thanksgiving-hours"></td>
+            <td id="to-thanksgiving-minutes"></td>
+            <td id="to-thanksgiving-seconds"></td>
+          </tr>
+          <tr>
+            <td>Days</td>
+            <td>Hours</td>
+            <td>Minutes</td>
+            <td>Seconds</td>
+          </tr>
+      </table>
+    </h1>
+</div>
+```
+
+## Custom Countdown
+Adds a configurable countdown timer to your viewer page. Supports two modes:
+- **Specific date/time**: Countdown to a one-time event (e.g., New Year's Eve)
+- **Daily recurring time**: Countdown to a specific time each day (e.g., 6pm showtime)
+
+In order to use this, you will need to add a container element with a `data-target` attribute and the display elements.
+
+### Target Format
+The `data-target` attribute accepts two formats:
+
+**Specific date/time** (ISO 8601 format):
+```
+data-target="2026-12-31T23:59:59"
+```
+
+**Daily recurring time** (24-hour format):
+```
+data-target="18:00"
+data-target="18:00:00"
+```
+
+For daily recurring times, if the target time has already passed today, the countdown will automatically show the time until tomorrow's target.
+
+### Required Elements
+The container must have an ID of `custom-countdown` with the `data-target` attribute. The display elements must have the following IDs:
+```
+custom-countdown-days
+custom-countdown-hours
+custom-countdown-minutes
+custom-countdown-seconds
+```
+
+Below is example code for a daily 6pm countdown:
+```
+.countdownContainer {
+   margin: 0 auto;
+   text-align: center;
+   padding: 20px;
+   border-radius: 5px;
+}
+
+.custom {
+   font-size: 4rem;
+}
+.counter {
+   font-size: 4rem;
+}
+
+<div id="custom-countdown" data-target="18:00" style="padding-top:5em">
+    <h1>
+        <table class="countdownContainer">
+          <tr class="custom">
+            <td colspan="4">Countdown to Showtime!</td>
+          </tr>
+          <tr class="counter">
+            <td id="custom-countdown-days"></td>
+            <td id="custom-countdown-hours"></td>
+            <td id="custom-countdown-minutes"></td>
+            <td id="custom-countdown-seconds"></td>
           </tr>
           <tr>
             <td>Days</td>
