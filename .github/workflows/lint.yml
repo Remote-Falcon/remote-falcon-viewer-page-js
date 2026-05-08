@@ -1,0 +1,23 @@
+name: Lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  syntax-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Syntax-check every script in scripts.json
+        run: |
+          set -e
+          for name in $(jq -r '.[]' scripts.json); do
+            file="${name}.js"
+            echo "node --check ${file}"
+            node --check "${file}"
+          done

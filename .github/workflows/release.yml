@@ -1,0 +1,43 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compute SRI hashes for every script in scripts.json
+        run: |
+          set -e
+          {
+            echo "## Subresource Integrity"
+            echo ""
+            echo "When embedding these scripts, pin the version in the URL and add the matching \`integrity\` attribute:"
+            echo ""
+            echo '```html'
+            echo '<script src="https://<cdn>/<path>/${{ github.ref_name }}/<script>.js"'
+            echo '        integrity="<sha384-hash from below>"'
+            echo '        crossorigin="anonymous"></script>'
+            echo '```'
+            echo ""
+            echo '| Script | SRI hash |'
+            echo '|---|---|'
+            for name in $(jq -r '.[]' scripts.json); do
+              file="${name}.js"
+              hash="sha384-$(openssl dgst -sha384 -binary "${file}" | base64 -w0)"
+              echo "| \`${file}\` | \`${hash}\` |"
+            done
+          } > release-notes.md
+          cat release-notes.md
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "${GITHUB_REF_NAME}" --notes-file release-notes.md --title "${GITHUB_REF_NAME}"
