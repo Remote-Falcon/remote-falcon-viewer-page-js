@@ -10,6 +10,7 @@
    4. [Thanksgiving Countdown](#thanksgiving-countdown)
    5. [Custom Countdown](#custom-countdown)
    6. [Dynamic Menu](#dynamic-menu)
+4. [For Integrators](#for-integrators)
 # Script Guidelines
 Before submitting your scripts for use with Remote Falcon, there are some general
 guidelines that need to be followed. If not followed properly, it could result in the 
@@ -548,7 +549,11 @@ Add the below to your <head> section
 	#
 	
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer">
 ```
 
 Next inside the <body> tag will be the below HTML.  
@@ -608,3 +613,17 @@ You may need to buffer the bottom of some tabs with extra lines to prevent the m
 </div>
 
 ```
+
+# For Integrators
+
+These scripts are served as static files via CDN. Whoever embeds them in a viewer page (the Remote Falcon platform itself, or a self-hosted equivalent) should:
+
+1. **Pin the version.** Reference a tagged release URL rather than `main`. Each tag publishes a GitHub Release containing the SRI hash for every script — see [Releases](https://github.com/Remote-Falcon/remote-falcon-viewer-page-js/releases).
+2. **Add `integrity` and `crossorigin="anonymous"`** to each `<script>` tag using the published SRI hash. This protects viewer pages if the CDN distribution layer is ever compromised.
+   ```html
+   <script src="https://<cdn>/<path>/v1.2.0/makeItSnow.js"
+           integrity="sha384-…"
+           crossorigin="anonymous"
+           defer></script>
+   ```
+3. **Use `defer`** (or place the tag immediately before `</body>`). The scripts initialize on `DOMContentLoaded` and tolerate either placement, but `defer` keeps the HTML parser unblocked.
