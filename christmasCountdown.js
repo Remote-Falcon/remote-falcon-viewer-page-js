@@ -1,7 +1,12 @@
 (function () {
   'use strict';
 
-  function tick() {
+  if (window.__rfChristmasCountdown) return;
+  window.__rfChristmasCountdown = true;
+
+  let elDays, elHours, elMinutes, elSeconds;
+
+  function update() {
     let now = new Date();
     let year = now.getFullYear();
     let evenDate = new Date(year, 11, 25);
@@ -28,21 +33,34 @@
     m = m < 10 ? '0' + m : m;
     s = s < 10 ? '0' + s : s;
 
-    if (document.querySelector('#to-christmas-days') != null) {
-      document.querySelector('#to-christmas-days').textContent = d;
-    }
-    if (document.querySelector('#to-christmas-hours') != null) {
-      document.querySelector('#to-christmas-hours').textContent = h;
-    }
-    if (document.querySelector('#to-christmas-minutes') != null) {
-      document.querySelector('#to-christmas-minutes').textContent = m;
-    }
-    if (document.querySelector('#to-christmas-seconds') != null) {
-      document.querySelector('#to-christmas-seconds').textContent = s;
-    }
-
-    setTimeout(tick, 1000);
+    if (elDays) elDays.textContent = d;
+    if (elHours) elHours.textContent = h;
+    if (elMinutes) elMinutes.textContent = m;
+    if (elSeconds) elSeconds.textContent = s;
   }
 
-  tick();
+  function loop() {
+    if (!document.hidden) update();
+    setTimeout(loop, 1000);
+  }
+
+  function start() {
+    elDays = document.querySelector('#to-christmas-days');
+    elHours = document.querySelector('#to-christmas-hours');
+    elMinutes = document.querySelector('#to-christmas-minutes');
+    elSeconds = document.querySelector('#to-christmas-seconds');
+
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) update();
+    });
+
+    update();
+    loop();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start);
+  } else {
+    start();
+  }
 })();

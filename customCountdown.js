@@ -1,14 +1,19 @@
 (function () {
   'use strict';
 
-  function tick() {
-    let container = document.querySelector('#custom-countdown');
-    if (container == null) {
-      return;
-    }
+  if (window.__rfCustomCountdown) return;
+  window.__rfCustomCountdown = true;
 
-    let targetValue = container.getAttribute('data-target');
+  let container, elDays, elHours, elMinutes, elSeconds;
+  let warned = false;
+
+  function update() {
+    const targetValue = container.getAttribute('data-target');
     if (targetValue == null) {
+      if (!warned) {
+        console.warn('[remote-falcon] custom-countdown: missing data-target attribute');
+        warned = true;
+      }
       return;
     }
 
@@ -33,18 +38,19 @@
       // Specific date/time format
       evenDate = new Date(targetValue);
 
-      // If invalid date, exit
       if (isNaN(evenDate.getTime())) {
+        if (!warned) {
+          console.warn('[remote-falcon] custom-countdown: invalid data-target', targetValue);
+          warned = true;
+        }
         return;
       }
     }
 
-    let remTime = evenDate.getTime() - now.getTime();
+    warned = false;
 
-    // If the target has passed (for non-recurring), show zeros
-    if (remTime < 0) {
-      remTime = 0;
-    }
+    let remTime = evenDate.getTime() - now.getTime();
+    if (remTime < 0) remTime = 0;
 
     let s = Math.floor(remTime / 1000);
     let m = Math.floor(s / 60);
@@ -59,21 +65,40 @@
     m = m < 10 ? '0' + m : m;
     s = s < 10 ? '0' + s : s;
 
-    if (document.querySelector('#custom-countdown-days') != null) {
-      document.querySelector('#custom-countdown-days').textContent = d;
-    }
-    if (document.querySelector('#custom-countdown-hours') != null) {
-      document.querySelector('#custom-countdown-hours').textContent = h;
-    }
-    if (document.querySelector('#custom-countdown-minutes') != null) {
-      document.querySelector('#custom-countdown-minutes').textContent = m;
-    }
-    if (document.querySelector('#custom-countdown-seconds') != null) {
-      document.querySelector('#custom-countdown-seconds').textContent = s;
-    }
-
-    setTimeout(tick, 1000);
+    if (elDays) elDays.textContent = d;
+    if (elHours) elHours.textContent = h;
+    if (elMinutes) elMinutes.textContent = m;
+    if (elSeconds) elSeconds.textContent = s;
   }
 
-  tick();
+  function loop() {
+    if (!document.hidden) update();
+    setTimeout(loop, 1000);
+  }
+
+  function start() {
+    container = document.querySelector('#custom-countdown');
+    if (container == null) {
+      console.warn('[remote-falcon] custom-countdown: missing #custom-countdown container');
+      return;
+    }
+
+    elDays = document.querySelector('#custom-countdown-days');
+    elHours = document.querySelector('#custom-countdown-hours');
+    elMinutes = document.querySelector('#custom-countdown-minutes');
+    elSeconds = document.querySelector('#custom-countdown-seconds');
+
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) update();
+    });
+
+    update();
+    loop();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start);
+  } else {
+    start();
+  }
 })();
