@@ -1,6 +1,11 @@
 (function () {
   'use strict';
 
+  if (window.__rfThanksgivingCountdown) return;
+  window.__rfThanksgivingCountdown = true;
+
+  let elDays, elHours, elMinutes, elSeconds;
+
   // Calculate the 4th Thursday of November for a given year
   function getThanksgiving(year) {
     let november = new Date(year, 10, 1);
@@ -10,7 +15,7 @@
     return new Date(year, 10, fourthThursday);
   }
 
-  function tick() {
+  function update() {
     let now = new Date();
     let year = now.getFullYear();
     let evenDate = getThanksgiving(year);
@@ -38,21 +43,34 @@
     m = m < 10 ? '0' + m : m;
     s = s < 10 ? '0' + s : s;
 
-    if (document.querySelector('#to-thanksgiving-days') != null) {
-      document.querySelector('#to-thanksgiving-days').textContent = d;
-    }
-    if (document.querySelector('#to-thanksgiving-hours') != null) {
-      document.querySelector('#to-thanksgiving-hours').textContent = h;
-    }
-    if (document.querySelector('#to-thanksgiving-minutes') != null) {
-      document.querySelector('#to-thanksgiving-minutes').textContent = m;
-    }
-    if (document.querySelector('#to-thanksgiving-seconds') != null) {
-      document.querySelector('#to-thanksgiving-seconds').textContent = s;
-    }
-
-    setTimeout(tick, 1000);
+    if (elDays) elDays.textContent = d;
+    if (elHours) elHours.textContent = h;
+    if (elMinutes) elMinutes.textContent = m;
+    if (elSeconds) elSeconds.textContent = s;
   }
 
-  tick();
+  function loop() {
+    if (!document.hidden) update();
+    setTimeout(loop, 1000);
+  }
+
+  function start() {
+    elDays = document.querySelector('#to-thanksgiving-days');
+    elHours = document.querySelector('#to-thanksgiving-hours');
+    elMinutes = document.querySelector('#to-thanksgiving-minutes');
+    elSeconds = document.querySelector('#to-thanksgiving-seconds');
+
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) update();
+    });
+
+    update();
+    loop();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start);
+  } else {
+    start();
+  }
 })();
