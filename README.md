@@ -1,3 +1,20 @@
+> # ⚠️ DEPRECATED — DO NOT USE
+>
+> **This repository is deprecated and no longer in use.** As of October 2025 the
+> Remote Falcon platform stopped fetching these scripts from GitHub/jsDelivr and
+> now serves its own **vendored** copies as static assets out of the UI service
+> (`remote-falcon-platform` → `apps/ui/public/viewer-scripts/`), edge-cached by
+> Cloudflare. Nothing in production fetches from this repo at build time or
+> runtime.
+>
+> The vendored copies in the monorepo are the **source of truth** and have since
+> diverged ahead of this repo (countdown stability fixes, IIFE isolation). Do not
+> make changes here expecting them to reach production — edit
+> `apps/ui/public/viewer-scripts/` in `remote-falcon-platform` instead.
+>
+> This repo is retained read-only for historical reference and is slated to be
+> archived.
+
 # Remote Falcon Viewer Page Scripts
 
 1. [Script Guidelines](#script-guidelines)
